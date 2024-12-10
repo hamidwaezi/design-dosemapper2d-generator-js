@@ -131,6 +131,12 @@ const build = function (updateVariables) {
 
 
     //Download link
+    downloadSvg(svg);
+    svg2Png(svg);
+    console.info(beads)//prints all attributes of object
+}
+const downloadSvg= svg=>
+{
     const svgString = new XMLSerializer().serializeToString(svg);
     var svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
     var svgUrl = URL.createObjectURL(svgBlob);
@@ -139,5 +145,49 @@ const build = function (updateVariables) {
     downloadLink.href = svgUrl
     downloadLink.download = 'DOSEmapper-x-y.svg';
 
-    console.info(beads)//prints all attributes of object
+}
+const svg2Png = async $svg => {
+
+    // const $svg = document.getElementById('svg-container').querySelector('svg')
+    const $holder = document.getElementById('downloadING')
+
+
+    const svgData = encodeAsUTF8(serializeAsXML($svg))
+
+    const img = await loadImage(svgData)
+
+    const $canvas = document.createElement('canvas')
+    $canvas.width = $svg.clientWidth
+    $canvas.height = $svg.clientHeight
+    $canvas.getContext('2d').drawImage(img, 0, 0, $svg.clientWidth, $svg.clientHeight)
+
+    const dataURL = await $canvas.toDataURL(`image/png`, 1.0)
+    console.log(dataURL)
+
+    // const $img = document.createElement('img')
+    // $img.src = dataURL
+    $holder.download="dosemapper.png";
+    $holder.href=dataURL;
+
+}
+const loadImage = async url => {
+    const $img = document.createElement('img')
+    $img.src = url
+    return new Promise((resolve, reject) => {
+      $img.onload = () => resolve($img)
+      $img.onerror = reject
+    })
+}
+const dataHeader = 'data:image/svg+xml;charset=utf-8'
+
+const serializeAsXML = $e => (new XMLSerializer()).serializeToString($e)
+const encodeAsUTF8 = s => `${dataHeader},${encodeURIComponent(s)}`
+const encodeAsB64 = s => `${dataHeader};base64,${btoa(s)}`
+const convertSVGtoImg = async e => {
+    const $btn = e.target
+    const format = $btn.dataset.format ?? 'png'
+    $label.textContent = format
+
+    destroyChildren($holder)
+
 }

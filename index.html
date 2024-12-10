@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vector Ruler SVG Generator</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="A web-based applet for the generation of downloadable vector DOSEmapper">
+    <meta name="keywords" content="Ilustrator,Vector,Vector DOSEmapper, SVG, SVG DOSEmapper, Javascript SVG">
+    <meta name="author" content="Hamid Waezi">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+
+</head>
+
+<body>
+
+    <div class="bootstrap-frm bootstrap-padded">
+        <form id="DOSEmapperParameters" action="">
+            <label>
+                <span>Output:</span>
+                <Input type="radio" name="dpi" id="dpi72" value="72ppx" checked>
+                72ppx dpi
+                <Input type="radio" name="dpi" id="dpi96" value="96ppx" />
+                96ppx dpi
+            </label>
+            <br />
+            <label>
+                <span>Width (mm):</span>
+                <input type="text" id="widthNo" value="40">
+            </label>
+            <label>
+                <span>Height (mm):</span>
+                <input type="text" id="heightNo" value="40">
+            </label>
+            <label>
+                <span>Padding(mm):</span>
+                <input type="text" id="paddingNo" value="5">
+            </label>
+
+
+        </form>
+        <div>
+            <main>
+                <section>
+                    <br>
+                    <div>
+                        <a class="button" id="downloadSVG">Download SVG</a>
+                    </div>
+                    <br>
+                    <div id="svgContainer"  ></div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+</body>
+
+<!-- <script type="text/javascript" src="dosemapperGenerator.js"></script> -->
+<script type='text/javascript' src='bead.js'></script>
+<script type='text/javascript' src='build.js'></script>
+<script type='text/javascript' src='svggen.js'></script>
+
+</html>

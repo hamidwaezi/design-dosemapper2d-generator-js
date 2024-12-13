@@ -77,14 +77,14 @@ const build = function (selectedBead = null) {
 
     // Create the SVG element
     var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    const svgW = dosemapper.a4Width / 10;
-    const svgH = dosemapper.a4Height / 10;
+    const svgW = dosemapper.paperWidth / 10;
+    const svgH = dosemapper.paperHeight / 10;
 
     svg.setAttribute("width", `${svgW}mm`);
     svg.setAttribute("height", `${svgH}mm`);
-    svg.setAttribute("viewBox", `0 0 ${dosemapper.a4Width} ${dosemapper.a4Height}`); // Define viewBox for scalable units
+    svg.setAttribute("viewBox", `0 0 ${dosemapper.paperWidth} ${dosemapper.paperHeight}`); // Define viewBox for scalable units
 
-    const canvasRect = drawRect({ x: 0, y: 0, width: dosemapper.a4Width, height: dosemapper.a4Height, color: "transparent" });
+    const canvasRect = drawRect({ x: 0, y: 0, width: dosemapper.paperWidth, height: dosemapper.paperHeight, color: "transparent" });
     svg.appendChild(canvasRect);
 
     const container = drawRect({ x: dosemapper.drawingRect.x, y: dosemapper.drawingRect.y, width: dosemapper.drawingRect.width, height: dosemapper.drawingRect.height, color: "transparent" });
@@ -95,7 +95,7 @@ const build = function (selectedBead = null) {
     // rectMain = drawRect({ x: x0, y: y0, width: dosemapper.width, height: dosemapper.height, corners: 0, stroke: "#aaaaaa" });
     // svg.appendChild(rectMain);
 
-    const ruler = drawRuler({ x: dosemapper.a4Width - 500, y: dosemapper.a4Height - 200, lenght: 2, oneCMLenght: 100 })
+    const ruler = drawRuler({ x: dosemapper.paperWidth - 500, y: dosemapper.paperHeight - 200, lenght: 2, oneCMLenght: 100 })
     svg.appendChild(ruler);
 
     const beadW = dosemapper.beadWidth;
